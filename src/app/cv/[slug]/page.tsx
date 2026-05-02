@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export default function CVPage({ params }: PageProps) {
@@ -16,19 +16,23 @@ export default function CVPage({ params }: PageProps) {
   const [error, setError] = useState(false)
   const [slug, setSlug] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [baseUrl, setBaseUrl] = useState('')
   const qrRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    params.then((resolvedParams) => {
-      setSlug(resolvedParams.slug)
-    })
-  }, [params])
+    setSlug(params.slug)
+  }, [params.slug])
 
   useEffect(() => {
     if (slug) {
       fetchCV()
     }
   }, [slug])
+
+  useEffect(() => {
+    // Set the base URL after component mounts (client-side only)
+    setBaseUrl(process.env.NEXT_PUBLIC_BASE_URL || window.location.origin)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,8 +115,7 @@ export default function CVPage({ params }: PageProps) {
     )
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-  const cvUrl = `${baseUrl}/cv/${slug}`
+  const cvUrl = baseUrl ? `${baseUrl}/cv/${slug}` : ''
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-blue-50 py-8 px-4">
@@ -454,40 +457,42 @@ export default function CVPage({ params }: PageProps) {
       </div>
 
       {/* Floating QR Code */}
-      <div className={`fixed bottom-8 right-8 z-50 transition-all duration-500 print:hidden ${
-        isScrolled ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-      }`}>
-        <div className="relative group">
-          {/* QR Code Container */}
-          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4">
-            <div ref={qrRef} className="bg-white p-3 rounded-xl shadow-inner">
-              <QRCodeSVG 
-                value={cvUrl} 
-                size={120} 
-                level="H"
-                includeMargin={true}
-                bgColor="#ffffff"
-                fgColor="#1e3a8a"
-              />
+      {cvUrl && (
+        <div className={`fixed bottom-8 right-8 z-50 transition-all duration-500 print:hidden ${
+          isScrolled ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+        }`}>
+          <div className="relative group">
+            {/* QR Code Container */}
+            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4">
+              <div ref={qrRef} className="bg-white p-3 rounded-xl shadow-inner">
+                <QRCodeSVG 
+                  value={cvUrl} 
+                  size={120} 
+                  level="H"
+                  includeMargin={true}
+                  bgColor="#ffffff"
+                  fgColor="#1e3a8a"
+                />
+              </div>
+              <p className="text-xs text-gray-600 mt-2 text-center font-medium">Scan to view CV</p>
+              
+              {/* Download Button - Always Visible */}
+              <button
+                onClick={downloadQRCode}
+                className="mt-3 w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+              >
+                <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download QR
+              </button>
             </div>
-            <p className="text-xs text-gray-600 mt-2 text-center font-medium">Scan to view CV</p>
             
-            {/* Download Button - Always Visible */}
-            <button
-              onClick={downloadQRCode}
-              className="mt-3 w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
-            >
-              <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download QR
-            </button>
+            {/* Pulse Effect */}
+            <div className="absolute inset-0 rounded-2xl animate-ping bg-blue-400 opacity-20 -z-10"></div>
           </div>
-          
-          {/* Pulse Effect */}
-          <div className="absolute inset-0 rounded-2xl animate-ping bg-blue-400 opacity-20 -z-10"></div>
         </div>
-      </div>
+      )}
 
       {/* Print Styles */}
       <style jsx global>{`
