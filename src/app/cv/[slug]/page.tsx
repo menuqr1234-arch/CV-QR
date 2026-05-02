@@ -133,7 +133,7 @@ export default function CVPage({ params }: PageProps) {
               </h1>
               <p className="text-gray-500 mt-2 flex items-center gap-2">
                 <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                Digital CV • Shareable & Printable
+                Digital CV 
               </p>
               <div className="mt-6">
                 <button
