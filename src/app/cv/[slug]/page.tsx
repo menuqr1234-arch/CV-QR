@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export default function CVPage({ params }: PageProps) {
@@ -19,10 +19,8 @@ export default function CVPage({ params }: PageProps) {
   const qrRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    params.then((resolvedParams) => {
-      setSlug(resolvedParams.slug)
-    })
-  }, [params])
+    setSlug(params.slug)
+  }, [params.slug])
 
   useEffect(() => {
     if (slug) {
@@ -111,7 +109,7 @@ export default function CVPage({ params }: PageProps) {
     )
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin
   const cvUrl = `${baseUrl}/cv/${slug}`
 
   return (
