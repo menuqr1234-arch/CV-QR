@@ -16,6 +16,7 @@ export default function CVPage({ params }: PageProps) {
   const [error, setError] = useState(false)
   const [slug, setSlug] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [baseUrl, setBaseUrl] = useState('')
   const qrRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -36,6 +37,13 @@ export default function CVPage({ params }: PageProps) {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // Set the base URL dynamically
+    const url = process.env.NEXT_PUBLIC_BASE_URL || 
+      (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}` : '')
+    setBaseUrl(url)
   }, [])
 
   const fetchCV = async () => {
@@ -111,8 +119,7 @@ export default function CVPage({ params }: PageProps) {
     )
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-  const cvUrl = `${baseUrl}/cv/${slug}`
+  const cvUrl = baseUrl ? `${baseUrl}/cv/${slug}` : ''
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-blue-50 py-8 px-4">
@@ -460,16 +467,18 @@ export default function CVPage({ params }: PageProps) {
         <div className="relative group">
           {/* QR Code Container */}
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4">
-            <div ref={qrRef} className="bg-white p-3 rounded-xl shadow-inner">
-              <QRCodeSVG 
-                value={cvUrl} 
-                size={120} 
-                level="H"
-                includeMargin={true}
-                bgColor="#ffffff"
-                fgColor="#1e3a8a"
-              />
-            </div>
+            {baseUrl && (
+              <div ref={qrRef} className="bg-white p-3 rounded-xl shadow-inner">
+                <QRCodeSVG 
+                  value={cvUrl} 
+                  size={120} 
+                  level="H"
+                  includeMargin={true}
+                  bgColor="#ffffff"
+                  fgColor="#1e3a8a"
+                />
+              </div>
+            )}
             <p className="text-xs text-gray-600 mt-2 text-center font-medium">Scan to view CV</p>
             
             {/* Download Button - Always Visible */}
