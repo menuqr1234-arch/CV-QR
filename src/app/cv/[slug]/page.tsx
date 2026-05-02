@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function CVPage({ params }: PageProps) {
@@ -18,21 +18,18 @@ export default function CVPage({ params }: PageProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const qrRef = useRef<HTMLDivElement>(null)
 
-  // Set slug from params
   useEffect(() => {
-    if (params?.slug) {
-      setSlug(params.slug)
-    }
-  }, [params.slug])
+    params.then((resolvedParams) => {
+      setSlug(resolvedParams.slug)
+    })
+  }, [params])
 
-  // Fetch CV when slug is available
   useEffect(() => {
     if (slug) {
       fetchCV()
     }
   }, [slug])
 
-  // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100)
@@ -43,25 +40,18 @@ export default function CVPage({ params }: PageProps) {
 
   const fetchCV = async () => {
     try {
-      setLoading(true)
-      setError(false)
-      
       const { data, error } = await supabase
         .from('cvs')
         .select('*')
         .eq('slug', slug)
         .single()
 
-      if (error) {
-        console.error('Supabase error:', error)
-        setError(true)
-      } else if (!data) {
+      if (error || !data) {
         setError(true)
       } else {
         setCv(data)
       }
     } catch (err) {
-      console.error('Fetch error:', err)
       setError(true)
     } finally {
       setLoading(false)
@@ -92,21 +82,6 @@ export default function CVPage({ params }: PageProps) {
     img.src = 'data:image/svg+xml;base64,' + btoa(svgData)
   }
 
-  // Get the base URL for QR code
-  const getBaseUrl = () => {
-    if (typeof window !== 'undefined') {
-      // Check for environment variable first, then fall back to window.location.origin
-      const envUrl = process.env.NEXT_PUBLIC_BASE_URL
-      if (envUrl) return envUrl
-      return window.location.origin
-    }
-    return 'https://cv-qr.vercel.app' // Fallback for SSR
-  }
-
-  const baseUrl = getBaseUrl()
-  const cvUrl = `${baseUrl}/cv/${slug}`
-
-  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -118,7 +93,6 @@ export default function CVPage({ params }: PageProps) {
     )
   }
 
-  // Show error state
   if (error || !cv) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -137,7 +111,9 @@ export default function CVPage({ params }: PageProps) {
     )
   }
 
-  // Main CV display
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+  const cvUrl = `${baseUrl}/cv/${slug}`
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-blue-50 py-8 px-4">
       <div className="max-w-5xl mx-auto">
@@ -293,7 +269,7 @@ export default function CVPage({ params }: PageProps) {
             </Section>
 
             {/* Skills Section */}
-            {((cv.skills?.professional?.length ?? 0) > 0 || (cv.skills?.personal?.length ?? 0) > 0) && (
+            {((cv.skills.professional?.length ?? 0) > 0 || (cv.skills.personal?.length ?? 0) > 0 || (cv.skills.technical?.length ?? 0) > 0 || (cv.skills.other?.length ?? 0) > 0) && (
               <Section 
                 title="Skills & Expertise" 
                 icon={
@@ -304,7 +280,7 @@ export default function CVPage({ params }: PageProps) {
                 color="purple"
               >
                 <div className="grid md:grid-cols-2 gap-6">
-                  {(cv.skills?.professional?.length ?? 0) > 0 && (
+                  {((cv.skills.professional?.length ?? 0) > 0 || (cv.skills.technical?.length ?? 0) > 0) && (
                     <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
                       <h4 className="font-bold text-purple-900 mb-4 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -313,7 +289,7 @@ export default function CVPage({ params }: PageProps) {
                         Professional Skills
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {cv.skills.professional.map((skill: string, i: number) => (
+                        {(cv.skills.professional ?? cv.skills.technical ?? []).map((skill: string, i: number) => (
                           <span key={i} className="px-4 py-2 bg-white text-purple-700 rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-shadow border border-purple-200">
                             {skill}
                           </span>
@@ -321,7 +297,7 @@ export default function CVPage({ params }: PageProps) {
                       </div>
                     </div>
                   )}
-                  {(cv.skills?.personal?.length ?? 0) > 0 && (
+                  {((cv.skills.personal?.length ?? 0) > 0 || (cv.skills.other?.length ?? 0) > 0) && (
                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
                       <h4 className="font-bold text-green-900 mb-4 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -330,7 +306,7 @@ export default function CVPage({ params }: PageProps) {
                         Personal Skills
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {cv.skills.personal.map((skill: string, i: number) => (
+                        {(cv.skills.personal ?? cv.skills.other ?? []).map((skill: string, i: number) => (
                           <span key={i} className="px-4 py-2 bg-white text-green-700 rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-shadow border border-green-200">
                             {skill}
                           </span>
