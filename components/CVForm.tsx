@@ -517,14 +517,14 @@ export default function CVForm() {
 
       case 'skills':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
             {/* Professional Skills */}
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
+            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-4 sm:p-6 rounded-xl border border-orange-100">
               <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                 <Wrench className="w-5 h-5 text-orange-600" />
                 Professional Skills <span className="text-red-500">*</span>
               </label>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {formData.skills.professional.map((skill, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="flex-shrink-0 text-orange-500">•</div>
@@ -532,14 +532,14 @@ export default function CVForm() {
                       type="text"
                       value={skill}
                       onChange={(e) => updateProfessionalSkill(idx, e.target.value)}
-                      placeholder={`Skill ${idx + 1} (e.g., Project Management, Data Analysis, Sales)`}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all bg-white"
+                      placeholder={`Skill ${idx + 1} (e.g., Project Management)`}
+                      className="flex-1 min-w-0 px-3 py-2 border border-gray-200 rounded-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all bg-white text-sm"
                     />
                     {formData.skills.professional.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeProfessionalSkill(idx)}
-                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors"
+                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors flex-shrink-0"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -558,12 +558,12 @@ export default function CVForm() {
             </div>
 
             {/* Personal Skills */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-100">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 sm:p-6 rounded-xl border border-blue-100">
               <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
                 <Star className="w-5 h-5 text-blue-600" />
                 Personal Skills
               </label>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {formData.skills.personal.map((skill, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="flex-shrink-0 text-blue-500">•</div>
@@ -571,14 +571,14 @@ export default function CVForm() {
                       type="text"
                       value={skill}
                       onChange={(e) => updatePersonalSkill(idx, e.target.value)}
-                      placeholder={`Skill ${idx + 1} (e.g., Leadership, Communication, Teamwork)`}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-white"
+                      placeholder={`Skill ${idx + 1} (e.g., Leadership)`}
+                      className="flex-1 min-w-0 px-3 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-white text-sm"
                     />
                     {formData.skills.personal.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removePersonalSkill(idx)}
-                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors"
+                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors flex-shrink-0"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -651,7 +651,7 @@ export default function CVForm() {
             <button 
               type="button" 
               onClick={addWork} 
-              className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-gray-500 hover:border-red-400 hover:text-red-500 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+              className="w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-red-400 hover:text-red-500 transition-all text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Experience
@@ -913,8 +913,8 @@ export default function CVForm() {
 
       {/* Main Content - Desktop: ml-80, Mobile: no margin */}
       <div className="lg:ml-80">
-        {/* Header */}
-        <div className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+        {/* Header - NOT sticky */}
+        <div className="bg-white border-b border-gray-200 shadow-sm">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               <div>
@@ -933,8 +933,8 @@ export default function CVForm() {
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="sticky top-[73px] z-20 h-1 bg-gray-200">
+        {/* Progress Bar - NOT sticky */}
+        <div className="h-1 bg-gray-200">
           <div 
             className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
             style={{ width: `${getSectionProgress()}%` }}
