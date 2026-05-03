@@ -370,7 +370,7 @@ export default function CVForm() {
             <div className="flex justify-center mb-6">
               <div className="relative">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 blur-xl opacity-20"></div>
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32">
+                <div className="relative w-32 h-32">
                   <ImageUpload
                     onImageChange={(base64) => updatePersonalInfo('profileImage', base64)}
                     currentImage={formData.personalInfo.profileImage}
@@ -378,7 +378,7 @@ export default function CVForm() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="group">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name <span className="text-red-500">*</span>
@@ -388,7 +388,7 @@ export default function CVForm() {
                   <input 
                     value={formData.personalInfo.fullName}
                     onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white text-sm sm:text-base" 
+                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white" 
                     placeholder="Juan Dela Cruz" 
                   />
                 </div>
@@ -402,12 +402,12 @@ export default function CVForm() {
                   <input 
                     value={formData.personalInfo.contactNumber}
                     onChange={(e) => updatePersonalInfo('contactNumber', e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white text-sm sm:text-base" 
+                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white" 
                     placeholder="+63 234 567 8900" 
                   />
                 </div>
               </div>
-              <div className="group sm:col-span-2">
+              <div className="group">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Email Address <span className="text-red-500">*</span>
                 </label>
@@ -417,19 +417,19 @@ export default function CVForm() {
                     value={formData.personalInfo.email}
                     onChange={(e) => updatePersonalInfo('email', e.target.value)}
                     type="email" 
-                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white text-sm sm:text-base" 
+                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white" 
                     placeholder="juan@example.com" 
                   />
                 </div>
               </div>
-              <div className="group sm:col-span-2">
+              <div className="group">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
                   <input 
                     value={formData.personalInfo.address}
                     onChange={(e) => updatePersonalInfo('address', e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white text-sm sm:text-base" 
+                    className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-gray-50 focus:bg-white" 
                     placeholder="Makati City, Philippines" 
                   />
                 </div>
@@ -441,7 +441,7 @@ export default function CVForm() {
       case 'profile':
         return (
           <div className="space-y-4">
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-3 sm:p-4 rounded-lg border border-purple-100">
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg border border-purple-100">
               <p className="text-sm text-purple-800 mb-2">💡 Tip for a great objective:</p>
               <ul className="text-xs text-purple-700 space-y-1">
                 <li>• Keep it concise (2-3 sentences)</li>
@@ -453,7 +453,7 @@ export default function CVForm() {
               value={formData.profile}
               onChange={(e) => setFormData(prev => ({ ...prev, profile: e.target.value }))}
               rows={6} 
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all bg-gray-50 focus:bg-white resize-y font-serif leading-relaxed text-sm sm:text-base" 
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all bg-gray-50 focus:bg-white resize-y font-serif leading-relaxed" 
               placeholder="Write a clear career objective that states your professional goals and what you aim to achieve in your next role..." 
             />
           </div>
@@ -463,11 +463,11 @@ export default function CVForm() {
         return (
           <div className="space-y-4">
             {formData.education.map((edu, index) => (
-              <div key={index} className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-lg p-4 sm:p-5 hover:shadow-md transition-all">
+              <div key={index} className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Education #{index + 1}</h3>
+                    <GraduationCap className="w-5 h-5 text-green-600" />
+                    <h3 className="font-semibold text-gray-900">Education #{index + 1}</h3>
                   </div>
                   {index > 0 && (
                     <button 
@@ -484,13 +484,13 @@ export default function CVForm() {
                     value={edu.school}
                     onChange={(e) => updateEducation(index, 'school', e.target.value)}
                     placeholder="School / University Name" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white" 
                   />
                   <input 
                     value={edu.field}
                     onChange={(e) => updateEducation(index, 'field', e.target.value)}
                     placeholder="Degree / Qualification" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white" 
                   />
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -498,7 +498,7 @@ export default function CVForm() {
                       value={edu.year}
                       onChange={(e) => updateEducation(index, 'year', e.target.value)}
                       placeholder="Year of Graduation" 
-                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white text-sm sm:text-base" 
+                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 transition-all bg-white" 
                     />
                   </div>
                 </div>
@@ -519,10 +519,10 @@ export default function CVForm() {
         return (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Professional Skills */}
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-4 sm:p-6 rounded-xl border border-orange-100">
+            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
               <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <Wrench className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                <span>Professional Skills <span className="text-red-500">*</span></span>
+                <Wrench className="w-5 h-5 text-orange-600" />
+                Professional Skills <span className="text-red-500">*</span>
               </label>
               <div className="space-y-2">
                 {formData.skills.professional.map((skill, idx) => (
@@ -533,13 +533,13 @@ export default function CVForm() {
                       value={skill}
                       onChange={(e) => updateProfessionalSkill(idx, e.target.value)}
                       placeholder={`Skill ${idx + 1} (e.g., Project Management, Data Analysis, Sales)`}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all bg-white text-sm sm:text-base"
+                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all bg-white"
                     />
                     {formData.skills.professional.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeProfessionalSkill(idx)}
-                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors flex-shrink-0"
+                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -558,10 +558,10 @@ export default function CVForm() {
             </div>
 
             {/* Personal Skills */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 sm:p-6 rounded-xl border border-blue-100">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-100">
               <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <Star className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                <span>Personal Skills</span>
+                <Star className="w-5 h-5 text-blue-600" />
+                Personal Skills
               </label>
               <div className="space-y-2">
                 {formData.skills.personal.map((skill, idx) => (
@@ -572,13 +572,13 @@ export default function CVForm() {
                       value={skill}
                       onChange={(e) => updatePersonalSkill(idx, e.target.value)}
                       placeholder={`Skill ${idx + 1} (e.g., Leadership, Communication, Teamwork)`}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-white text-sm sm:text-base"
+                      className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all bg-white"
                     />
                     {formData.skills.personal.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removePersonalSkill(idx)}
-                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors flex-shrink-0"
+                        className="text-red-500 hover:text-red-600 p-1 hover:bg-red-50 rounded transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -602,11 +602,11 @@ export default function CVForm() {
         return (
           <div className="space-y-4">
             {formData.workExperience.map((work, index) => (
-              <div key={index} className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-lg p-4 sm:p-5 hover:shadow-md transition-all">
+              <div key={index} className="bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-2">
-                    <Building className="w-5 h-5 text-red-600 flex-shrink-0" />
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Experience #{index + 1}</h3>
+                    <Building className="w-5 h-5 text-red-600" />
+                    <h3 className="font-semibold text-gray-900">Experience #{index + 1}</h3>
                   </div>
                   <button 
                     type="button" 
@@ -621,13 +621,13 @@ export default function CVForm() {
                     value={work.jobTitle}
                     onChange={(e) => updateWork(index, 'jobTitle', e.target.value)}
                     placeholder="Job Title" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white" 
                   />
                   <input 
                     value={work.company}
                     onChange={(e) => updateWork(index, 'company', e.target.value)}
                     placeholder="Company Name" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white" 
                   />
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -635,7 +635,7 @@ export default function CVForm() {
                       value={work.dates}
                       onChange={(e) => updateWork(index, 'dates', e.target.value)}
                       placeholder="Dates (e.g., Jan 2020 - Present)" 
-                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white text-sm sm:text-base" 
+                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white" 
                     />
                   </div>
                   <textarea 
@@ -643,7 +643,7 @@ export default function CVForm() {
                     onChange={(e) => updateWork(index, 'responsibilities', e.target.value)}
                     placeholder="Key responsibilities and achievements" 
                     rows={3} 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white resize-y text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all bg-white resize-y" 
                   />
                 </div>
               </div>
@@ -663,11 +663,11 @@ export default function CVForm() {
         return (
           <div className="space-y-4">
             {formData.achievements.map((achievement, index) => (
-              <div key={index} className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-4 sm:p-5 hover:shadow-md transition-all">
+              <div key={index} className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-5 hover:shadow-md transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-2">
-                    <Trophy className="w-5 h-5 text-yellow-600 flex-shrink-0" />
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Achievement #{index + 1}</h3>
+                    <Trophy className="w-5 h-5 text-yellow-600" />
+                    <h3 className="font-semibold text-gray-900">Achievement #{index + 1}</h3>
                   </div>
                   <button 
                     type="button" 
@@ -682,7 +682,7 @@ export default function CVForm() {
                     value={achievement.title}
                     onChange={(e) => updateAchievement(index, 'title', e.target.value)}
                     placeholder="Achievement Title (e.g., Employee of the Month, Top Sales Award)" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white" 
                   />
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -690,7 +690,7 @@ export default function CVForm() {
                       value={achievement.year}
                       onChange={(e) => updateAchievement(index, 'year', e.target.value)}
                       placeholder="Year Achieved" 
-                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white text-sm sm:text-base" 
+                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white" 
                     />
                   </div>
                   <textarea 
@@ -698,7 +698,7 @@ export default function CVForm() {
                     onChange={(e) => updateAchievement(index, 'description', e.target.value)}
                     placeholder="Describe your achievement and its impact" 
                     rows={3} 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white resize-y text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-all bg-white resize-y" 
                   />
                 </div>
                 <div>
@@ -725,11 +725,11 @@ export default function CVForm() {
         return (
           <div className="space-y-4">
             {formData.references.map((ref, index) => (
-              <div key={index} className="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-lg p-4 sm:p-5 hover:shadow-md transition-all">
+              <div key={index} className="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-lg p-5 hover:shadow-md transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-2">
-                    <Quote className="w-5 h-5 text-indigo-600 flex-shrink-0" />
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Reference #{index + 1}</h3>
+                    <Quote className="w-5 h-5 text-indigo-600" />
+                    <h3 className="font-semibold text-gray-900">Reference #{index + 1}</h3>
                   </div>
                   <button 
                     type="button" 
@@ -744,13 +744,13 @@ export default function CVForm() {
                     value={ref.name}
                     onChange={(e) => updateReference(index, 'name', e.target.value)}
                     placeholder="Full Name" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white" 
                   />
                   <input 
                     value={ref.position}
                     onChange={(e) => updateReference(index, 'position', e.target.value)}
                     placeholder="Position / Title (e.g., Manager, Professor)" 
-                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white text-sm sm:text-base" 
+                    className="px-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white" 
                   />
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -758,7 +758,7 @@ export default function CVForm() {
                       value={ref.contact}
                       onChange={(e) => updateReference(index, 'contact', e.target.value)}
                       placeholder="Email or Phone Number" 
-                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white text-sm sm:text-base" 
+                      className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all bg-white" 
                     />
                   </div>
                 </div>
@@ -782,7 +782,7 @@ export default function CVForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Mobile menu button */}
+      {/* Mobile menu button - only visible on mobile */}
       <div className="fixed top-4 left-4 z-50 lg:hidden">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -792,7 +792,7 @@ export default function CVForm() {
         </button>
       </div>
 
-      {/* Overlay for mobile */}
+      {/* Mobile overlay */}
       {mobileMenuOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -800,21 +800,21 @@ export default function CVForm() {
         />
       )}
 
-      {/* Sidebar - Full height, fixed on desktop, sliding on mobile */}
+      {/* Sidebar - Desktop fixed, Mobile sliding */}
       <div className={`
-        mobile-sidebar fixed top-0 left-0 h-full bg-white shadow-2xl z-40 transition-transform duration-300 ease-in-out
-        lg:translate-x-0 lg:w-80 lg:relative lg:shadow-none
+        fixed top-0 left-0 h-full bg-white shadow-2xl z-40 transition-transform duration-300 ease-in-out
+        lg:fixed lg:left-0 lg:translate-x-0 lg:w-80
         ${mobileMenuOpen ? 'translate-x-0 w-80' : '-translate-x-full w-80'}
       `}>
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 sm:p-6">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-white/20 p-2 rounded-lg backdrop-blur">
-                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-white font-bold text-base sm:text-lg">CV Builder</h2>
+                <h2 className="text-white font-bold text-lg">CV Builder</h2>
                 <p className="text-white/80 text-xs">Complete your profile</p>
               </div>
             </div>
@@ -833,13 +833,12 @@ export default function CVForm() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-1 sm:space-y-2">
+          <nav className="flex-1 overflow-y-auto p-4 space-y-2">
             {sections.map(section => {
               const isActive = activeSection === section.id
               const colors = getColorClass(section.color, isActive)
               const Icon = section.icon
               
-              // Check if section is complete
               let isComplete = false
               switch(section.id) {
                 case 'personal':
@@ -873,7 +872,7 @@ export default function CVForm() {
                     setMobileMenuOpen(false)
                   }}
                   className={`
-                    w-full text-left p-2.5 sm:p-3 rounded-xl transition-all duration-200
+                    w-full text-left p-3 rounded-xl transition-all duration-200
                     ${isActive 
                       ? `${colors.bg} ${colors.text} shadow-sm border-l-4 ${colors.border}` 
                       : 'hover:bg-gray-50 text-gray-600'
@@ -881,17 +880,17 @@ export default function CVForm() {
                   `}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={`w-5 h-5 ${isActive ? colors.text : 'text-gray-400'} flex-shrink-0`} />
-                    <div className="flex-1 min-w-0">
+                    <Icon className={`w-5 h-5 ${isActive ? colors.text : 'text-gray-400'}`} />
+                    <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <span className={`text-xs sm:text-sm font-medium truncate ${isActive ? colors.text : 'text-gray-700'}`}>
+                        <span className={`text-sm font-medium ${isActive ? colors.text : 'text-gray-700'}`}>
                           {section.name}
                         </span>
                         {isComplete && (
-                          <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0 ml-2" />
+                          <CheckCircle className="w-3.5 h-3.5 text-green-500" />
                         )}
                       </div>
-                      <p className={`text-xs mt-0.5 truncate ${isActive ? 'text-gray-600' : 'text-gray-400'}`}>
+                      <p className={`text-xs mt-0.5 ${isActive ? 'text-gray-600' : 'text-gray-400'}`}>
                         {section.description}
                       </p>
                     </div>
@@ -902,8 +901,8 @@ export default function CVForm() {
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="p-3 sm:p-4 border-t border-gray-200">
-            <div className="bg-gray-50 rounded-lg p-2 sm:p-3">
+          <div className="p-4 border-t border-gray-200">
+            <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-600 text-center">
                 Complete all sections to generate your professional CV
               </p>
@@ -912,21 +911,21 @@ export default function CVForm() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="lg:pl-80">
+      {/* Main Content - Desktop: ml-80, Mobile: no margin */}
+      <div className="lg:ml-80">
         {/* Header */}
         <div className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
-          <div className="px-4 sm:px-6 py-3 sm:py-4">
+          <div className="px-6 py-4">
             <div className="flex items-center justify-between">
-              <div className="hidden lg:block">
-                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   CV Builder
                 </h1>
-                <p className="text-xs text-gray-500">Create your professional CV</p>
+                <p className="text-xs text-gray-500 hidden lg:block">Create your professional CV</p>
               </div>
-              <div className="flex items-center gap-3 ml-auto lg:ml-0">
-                <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-                  <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" />
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
                   <span>Progress: {Math.round(getSectionProgress())}%</span>
                 </div>
               </div>
@@ -935,7 +934,7 @@ export default function CVForm() {
         </div>
 
         {/* Progress Bar */}
-        <div className="sticky top-[57px] sm:top-[65px] lg:top-[73px] z-20 h-1 bg-gray-200">
+        <div className="sticky top-[73px] z-20 h-1 bg-gray-200">
           <div 
             className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300"
             style={{ width: `${getSectionProgress()}%` }}
@@ -943,19 +942,19 @@ export default function CVForm() {
         </div>
 
         {/* Content Area */}
-        <div className="pt-4 sm:pt-6 pb-8 sm:pb-12">
+        <div className="pt-8 pb-12">
           {errorDetails && (
-            <div className="max-w-4xl mx-auto mt-4 px-4 sm:px-6">
+            <div className="max-w-4xl mx-auto mt-4 px-6">
               <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm">
                 <p className="text-sm text-red-700">{errorDetails}</p>
               </div>
             </div>
           )}
 
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+          <div className="max-w-4xl mx-auto px-6 py-8">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="p-4 sm:p-6 md:p-8">
-                <div className="mb-6 sm:mb-8">
+              <div className="p-8">
+                <div className="mb-8">
                   <div className="flex items-center gap-2 mb-2">
                     {(() => {
                       const currentSection = sections.find(s => s.id === activeSection)
@@ -963,43 +962,43 @@ export default function CVForm() {
                       const Icon = currentSection?.icon
                       return (
                         <>
-                          {Icon && <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${colors.text}`} />}
-                          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                          {Icon && <Icon className={`w-6 h-6 ${colors.text}`} />}
+                          <h2 className="text-2xl font-bold text-gray-900">
                             {currentSection?.name}
                           </h2>
                         </>
                       )
                     })()}
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                  <p className="text-sm text-gray-500 mt-1">
                     Fill in the details for this section
                   </p>
                 </div>
 
-                <div className="mb-6 sm:mb-8">
+                <div className="mb-8">
                   {renderContent()}
                 </div>
 
                 {/* Navigation Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between pt-6 border-t border-gray-200">
                   {prevSection ? (
                     <button
                       type="button"
                       onClick={goToPrev}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all font-medium text-sm sm:text-base"
+                      className="flex items-center gap-2 px-5 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all font-medium"
                     >
                       <ChevronLeft className="w-4 h-4" />
                       {prevSection.name}
                     </button>
                   ) : (
-                    <div className="hidden sm:block" />
+                    <div />
                   )}
                   
                   {nextSection ? (
                     <button
                       type="button"
                       onClick={goToNext}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm hover:shadow-md font-medium text-sm sm:text-base"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm hover:shadow-md font-medium"
                     >
                       {nextSection.name}
                       <ChevronRight className="w-4 h-4" />
@@ -1008,7 +1007,7 @@ export default function CVForm() {
                     <button
                       onClick={onSubmit}
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-sm hover:shadow-md disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed font-medium text-sm sm:text-base"
+                      className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-sm hover:shadow-md disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed font-medium"
                     >
                       {isSubmitting ? (
                         <>
@@ -1018,7 +1017,7 @@ export default function CVForm() {
                       ) : (
                         <>
                           <Save className="w-4 h-4" />
-                          Create CV
+                          Create CV & Generate QR Code
                         </>
                       )}
                     </button>
