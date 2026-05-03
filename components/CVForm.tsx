@@ -517,7 +517,7 @@ export default function CVForm() {
 
       case 'skills':
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Professional Skills */}
             <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
               <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
@@ -802,7 +802,7 @@ export default function CVForm() {
 
       {/* Sidebar - Desktop fixed, Mobile sliding */}
       <div className={`
-        fixed top-0 left-0 h-full bg-white shadow-2xl z-40 transition-transform duration-300 ease-in-out
+        mobile-sidebar fixed top-0 left-0 h-full bg-white shadow-2xl z-40 transition-transform duration-300 ease-in-out
         lg:fixed lg:left-0 lg:translate-x-0 lg:w-80
         ${mobileMenuOpen ? 'translate-x-0 w-80' : '-translate-x-full w-80'}
       `}>
