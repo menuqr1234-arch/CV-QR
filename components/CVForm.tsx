@@ -507,7 +507,7 @@ export default function CVForm() {
             <button 
               type="button" 
               onClick={addEducation} 
-              className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-gray-500 hover:border-green-400 hover:text-green-500 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-green-400 hover:text-green-500 transition-all text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Education
@@ -550,7 +550,7 @@ export default function CVForm() {
               <button
                 type="button"
                 onClick={addProfessionalSkill}
-                className="mt-3 w-full border-2 border-dashed border-orange-300 rounded-lg py-2 text-orange-600 hover:border-orange-400 hover:text-orange-700 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+                className="mt-3 w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 border-2 border-dashed border-orange-300 rounded-lg text-orange-600 hover:border-orange-400 hover:text-orange-700 transition-all text-sm font-medium"
               >
                 <Plus className="w-4 h-4" />
                 Add Professional Skill
@@ -589,7 +589,7 @@ export default function CVForm() {
               <button
                 type="button"
                 onClick={addPersonalSkill}
-                className="mt-3 w-full border-2 border-dashed border-blue-300 rounded-lg py-2 text-blue-600 hover:border-blue-400 hover:text-blue-700 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+                className="mt-3 w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 border-2 border-dashed border-blue-300 rounded-lg text-blue-600 hover:border-blue-400 hover:text-blue-700 transition-all text-sm font-medium"
               >
                 <Plus className="w-4 h-4" />
                 Add Personal Skill
@@ -651,7 +651,7 @@ export default function CVForm() {
             <button 
               type="button" 
               onClick={addWork} 
-              className="w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-red-400 hover:text-red-500 transition-all text-sm font-medium"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-red-400 hover:text-red-500 transition-all text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Experience
@@ -713,7 +713,7 @@ export default function CVForm() {
             <button 
               type="button" 
               onClick={addAchievement} 
-              className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-gray-500 hover:border-yellow-400 hover:text-yellow-500 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-yellow-400 hover:text-yellow-500 transition-all text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Achievement
@@ -767,7 +767,7 @@ export default function CVForm() {
             <button 
               type="button" 
               onClick={addReference} 
-              className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 text-gray-500 hover:border-indigo-400 hover:text-indigo-500 transition-all flex items-center justify-center gap-2 text-sm font-medium"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-indigo-400 hover:text-indigo-500 transition-all text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Reference
@@ -915,17 +915,17 @@ export default function CVForm() {
       <div className="lg:ml-80">
         {/* Header - NOT sticky */}
         <div className="bg-white border-b border-gray-200 shadow-sm">
-          <div className="px-6 py-4">
+          <div className="px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   CV Builder
                 </h1>
                 <p className="text-xs text-gray-500 hidden lg:block">Create your professional CV</p>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                  <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" />
                   <span>Progress: {Math.round(getSectionProgress())}%</span>
                 </div>
               </div>
@@ -942,19 +942,19 @@ export default function CVForm() {
         </div>
 
         {/* Content Area */}
-        <div className="pt-8 pb-12">
+        <div className="pt-6 sm:pt-8 pb-12">
           {errorDetails && (
-            <div className="max-w-4xl mx-auto mt-4 px-6">
+            <div className="max-w-4xl mx-auto mt-4 px-4 sm:px-6">
               <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm">
                 <p className="text-sm text-red-700">{errorDetails}</p>
               </div>
             </div>
           )}
 
-          <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="p-8">
-                <div className="mb-8">
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="mb-6 sm:mb-8">
                   <div className="flex items-center gap-2 mb-2">
                     {(() => {
                       const currentSection = sections.find(s => s.id === activeSection)
@@ -962,43 +962,43 @@ export default function CVForm() {
                       const Icon = currentSection?.icon
                       return (
                         <>
-                          {Icon && <Icon className={`w-6 h-6 ${colors.text}`} />}
-                          <h2 className="text-2xl font-bold text-gray-900">
+                          {Icon && <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${colors.text}`} />}
+                          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                             {currentSection?.name}
                           </h2>
                         </>
                       )
                     })()}
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1">
                     Fill in the details for this section
                   </p>
                 </div>
 
-                <div className="mb-8">
+                <div className="mb-6 sm:mb-8">
                   {renderContent()}
                 </div>
 
-                {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+                {/* Navigation Buttons - Responsive */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-200">
                   {prevSection ? (
                     <button
                       type="button"
                       onClick={goToPrev}
-                      className="flex items-center gap-2 px-5 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all font-medium"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all font-medium text-sm sm:text-base"
                     >
                       <ChevronLeft className="w-4 h-4" />
                       {prevSection.name}
                     </button>
                   ) : (
-                    <div />
+                    <div className="hidden sm:block" />
                   )}
                   
                   {nextSection ? (
                     <button
                       type="button"
                       onClick={goToNext}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm hover:shadow-md font-medium"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-sm hover:shadow-md font-medium text-sm sm:text-base"
                     >
                       {nextSection.name}
                       <ChevronRight className="w-4 h-4" />
@@ -1007,7 +1007,7 @@ export default function CVForm() {
                     <button
                       onClick={onSubmit}
                       disabled={isSubmitting}
-                      className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-sm hover:shadow-md disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed font-medium"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-sm hover:shadow-md disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed font-medium text-sm sm:text-base"
                     >
                       {isSubmitting ? (
                         <>
@@ -1017,7 +1017,7 @@ export default function CVForm() {
                       ) : (
                         <>
                           <Save className="w-4 h-4" />
-                          Create CV & Generate QR Code
+                          Create CV
                         </>
                       )}
                     </button>
